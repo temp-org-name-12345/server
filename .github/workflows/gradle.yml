@@ -49,4 +49,4 @@ jobs:
         run: |
           aws s3 cp \
           --region ${{ secrets.AWS_REGION }} \
-          --acl private ./server-0.0.1-SNAPSHOT.jar s3://ddakdae-s3-bucket/release/
+          --acl private ./deploy/server-0.0.1-SNAPSHOT.jar s3://ddakdae-s3-bucket/release/
