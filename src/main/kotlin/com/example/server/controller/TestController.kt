@@ -18,4 +18,9 @@ class TestController {
     fun test2() : Flow<String> {
         return data.asFlow()
     }
+
+    @GetMapping("/test3")
+    suspend fun test3() : String {
+        return "CI/CD TEST OK"
+    }
 }
