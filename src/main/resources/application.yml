@@ -1,16 +1,22 @@
+rds:
+  db:
+    url: ddakdae-rds-ins.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com:5432/ddakdae
+    username: postgres
+    password: ddakdae-test
+
 spring:
   profiles:
     active: local
-
-  r2dbc:
-    username: postgres
-    password: ddakdae-test
-    url: r2dbc:postgresql://ddakdae-rds-ins.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com:5432/ddakdae
 
   webflux:
     hiddenmethod:
       filter:
         enabled: true
+
+  r2dbc:
+    url: r2dbc:postgresql://${rds.db.url}
+    username:  ${rds.db.username}
+    password: ${rds.db.password}
 
 logging:
   level:
