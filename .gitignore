@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-ddakdae-pem.pem
-ddakdae-iam_accessKeys.csv
+*.pem
+*.csv
