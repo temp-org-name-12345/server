@@ -12,11 +12,12 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(http: ServerHttpSecurity) : SecurityWebFilterChain {
         return http
+            .cors { it.disable() }
             .csrf { it.disable() }
             .httpBasic { it.disable() }
             .formLogin { it.disable() }
             .logout { it.disable() }
-            .authorizeExchange { it.pathMatchers("/api/v1/**").permitAll() }
+            .authorizeExchange { it.anyExchange().permitAll() }
             .build()
     }
 }

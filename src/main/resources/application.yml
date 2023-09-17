@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: local
+
+  r2dbc:
+    username: postgres
+    password: 1111
+    url: r2dbc:postgresql://127.0.0.1:5432/test
+
+  webflux:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+
+debug: true
+
+---
+
+spring:
+  profiles:
+    active: prod
+
+
+
