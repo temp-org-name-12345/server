@@ -16,7 +16,7 @@ on:
 env:
   CODE_DEPLOY_APPLICATION_NAME: ddakdae-application
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ddakdae-deploy-group
-  S3_BUCKET_NAME: ddakdae-s3-bucket/release
+  S3_BUCKET_NAME: ddakdae-s3-bucket
 
 permissions:
   contents: read
