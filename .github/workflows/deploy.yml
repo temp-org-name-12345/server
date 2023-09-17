@@ -25,9 +25,7 @@ jobs: # CI/CD 세부 동작 (Job) 설정.
           aws-region: ${{ secrets.AWS_REGION }} # 깃허브 레포지토리 Secrets에 등록한 AWS_REGION.
 
       - name: Upload to S3
-        run: | # S3 버킷 이름.
-          aws s3 cp --region ap-northeast-2 ./build/libs/server-0.0.1-SNAPSHOT.jar s3://ddakdae-s3-bucket/release/app.jar
-
+        run: aws s3 cp --region ap-northeast-2 ./build/libs/server-0.0.1-SNAPSHOT.jar s3://ddakdae-s3-bucket/release/app.jar
       - name: Deploy # S3에 올라간 jar 파일을 CodeDeploy를 통해 가져온다..
         run: aws deploy create-deployment
           --application-name ddakdae-deploy # AWS의 Code Deploy 애플리케이션 이름.
