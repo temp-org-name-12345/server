@@ -16,6 +16,8 @@ jobs: # CI/CD 세부 동작 (Job) 설정.
 
       - name: Build # 빌드.
         run: ./gradlew clean bootjar
+      - name: zip create # S3에 올릴 zip 파일 생성. (빌드한 프로젝트를 압축)
+        run: zip -qq -r ./app.zip . # 파일명은 자유, 대신 아래 workflow에 적을 파일명과 동일하게 맞춰줄 것.
 
       - name: Configure AWS credentials # aws 인증 확인.
         uses: aws-actions/configure-aws-credentials@v1
@@ -25,10 +27,10 @@ jobs: # CI/CD 세부 동작 (Job) 설정.
           aws-region: ${{ secrets.AWS_REGION }} # 깃허브 레포지토리 Secrets에 등록한 AWS_REGION.
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./build/libs/server-0.0.1-SNAPSHOT.jar s3://ddakdae-s3-bucket/release/app.jar
+        run: aws s3 cp --region ap-northeast-2 ./app.zip s3://ddakdae-s3-bucket/release/app.zip
       - name: Deploy # S3에 올라간 jar 파일을 CodeDeploy를 통해 가져온다..
         run: aws deploy create-deployment
           --application-name ddakdae-deploy # AWS의 Code Deploy 애플리케이션 이름.
           --deployment-config-name CodeDeployDefault.AllAtOnce # Code Deploy에서 설정했던 Deploy 방식.
           --deployment-group-name ddakdae-deploy-group # AWS의 Code Deploy 애플리케이션의 배포 그룹 이름.
-          --s3-location bucket=ddakdae-s3-bucket/release/app.jar,bundleType=jar # Code Deploy가 S3에서 프로젝트를 찾을 수 있도록 경로 지정. (bucket=버킷 이름/test-build.zip)
+          --s3-location bucket=ddakdae-s3-bucket/release/app.zip,bundleType=zip # Code Deploy가 S3에서 프로젝트를 찾을 수 있도록 경로 지정. (bucket=버킷 이름/test-build.zip)
