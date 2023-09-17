@@ -1,8 +1,15 @@
 rds:
   db:
-    url: ddakdae-rds-ins.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com:5432/ddakdae
+    url: ddakdae-rds-instance.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com
+    port: 5432
+    database: ddakdae
     username: postgres
     password: ddakdae-test
+
+server:
+  ec2:
+    ip: 15.164.24.152
+    port: 8080
 
 spring:
   profiles:
@@ -14,7 +21,7 @@ spring:
         enabled: true
 
   r2dbc:
-    url: r2dbc:postgresql://${rds.db.url}
+    url: r2dbc:postgresql://${rds.db.url}:${rds.db.port}/${rds.db.database}
     username:  ${rds.db.username}
     password: ${rds.db.password}
 
@@ -30,5 +37,4 @@ spring:
   profiles:
     active: prod
 
-
-
+# EC2 -> RDS 접속 : psql --host={} --port=5432 --username=postgres

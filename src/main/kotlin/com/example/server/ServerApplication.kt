@@ -15,6 +15,7 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 @SpringBootApplication
 @EnableR2dbcRepositories
 class ServerApplication {
+	/*
 	@Bean
 	fun initializer(connectionFactory: ConnectionFactory) : ConnectionFactoryInitializer {
 		val initializer = ConnectionFactoryInitializer()
@@ -23,7 +24,9 @@ class ServerApplication {
 
 		return initializer
 	}
+	*/
 
+	/*
 	@Bean
 	fun dummy(repository: UserRepository) : CommandLineRunner {
 		return CommandLineRunner { args ->
@@ -36,6 +39,7 @@ class ServerApplication {
 				.block()
 		}
 	}
+	*/
 }
 
 fun main(args: Array<String>) {
