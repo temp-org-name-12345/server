@@ -15,7 +15,7 @@ class UserController(private val userRepository: UserRepository) {
         return userRepository.save(user)
     }
 
-    @GetMapping("/check")
+    @GetMapping("/api/v1/check")
     suspend fun checkUser(@RequestParam("email") email: String) : Boolean {
         return userRepository.existsByEmail(email)
     }
