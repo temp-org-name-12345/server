@@ -3,8 +3,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.1.3"
 	id("io.spring.dependency-management") version "1.1.3"
+	id("org.jetbrains.kotlin.plugin.allopen") version "1.9.10" /* kotlin all-open plugin */
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
+	kotlin("plugin.jpa") version "1.3.72"  /* jpa entity no-arg issue */
+}
+
+allOpen {
+	annotation("javax.persistence.Entity") /* all-open plugin을 적용시킬 어노테이션 추가 */
 }
 
 group = "com.example"
@@ -19,6 +25,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
@@ -28,6 +35,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+	// PostgreSQL R2DBC Driver
 	runtimeOnly("org.postgresql:r2dbc-postgresql")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
