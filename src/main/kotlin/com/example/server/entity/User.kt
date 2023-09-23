@@ -10,5 +10,4 @@ class User(
     val email: String,
     val nickname: String,
     val profileUrl: String,
-    var refreshToken: String? = null,
 )

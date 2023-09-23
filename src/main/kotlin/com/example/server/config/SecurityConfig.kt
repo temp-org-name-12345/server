@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
 
+/* https://www.baeldung.com/spring-security-5-reactive */
 @Configuration
 @EnableWebFluxSecurity
 class SecurityConfig {
@@ -17,7 +18,13 @@ class SecurityConfig {
             .httpBasic { it.disable() }
             .formLogin { it.disable() }
             .logout { it.disable() }
-            .authorizeExchange { it.anyExchange().permitAll() }
+            .authorizeExchange {
+                it
+                    .pathMatchers("/api/v1/**")
+                    .permitAll()
+                    .anyExchange()
+                    .authenticated()
+            }
             .build()
     }
 }
