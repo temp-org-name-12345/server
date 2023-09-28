@@ -1,11 +1,3 @@
-rds:
-  db:
-    url: ddakdae-rds-instance.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com
-    port: 5432
-    database: ddakdae
-    username: postgres
-    password: ddakdae-test
-
 server:
   ec2:
     ip: 15.164.24.152
@@ -15,24 +7,20 @@ spring:
   profiles:
     active: local
 
-  webflux:
-    hiddenmethod:
-      filter:
-        enabled: true
-
-  r2dbc:
-    url: r2dbc:postgresql://${rds.db.url}:${rds.db.port}/${rds.db.database}
-    username:  ${rds.db.username}
-    password: ${rds.db.password}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ddakdae-rds-instance.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com:5432/ddakdae
+    username: postgres
+    password: ddakdae-test
 
   jpa:
     open-in-view: false
     show-sql: true
-    hibernate:
-      ddl-auto: create
+    hibernate.ddl-auto: create
     properties:
       hibernate:
         format_sql: true
+        default_batch_fetch_size: 100
 
 logging:
   level:
