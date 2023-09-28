@@ -20,7 +20,7 @@ class SecurityConfig {
             .logout { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/v1/**").permitAll()
+                    .requestMatchers("/api/v1/user/**").permitAll()
                     .anyRequest().authenticated()
             }
             .build()

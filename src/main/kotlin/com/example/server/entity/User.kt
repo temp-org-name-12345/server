@@ -14,6 +14,9 @@ class User(
     @Column(unique = true, nullable = false, updatable = false, length = 128)
     val nickname: String,
 
+    @Column(unique = true, nullable = false, updatable = false)
+    val keyHash: String,
+
     @Column(nullable = true)
     val profileUrl: String,
 
