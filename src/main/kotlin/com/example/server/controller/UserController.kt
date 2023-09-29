@@ -26,6 +26,8 @@ class UserController(private val userService: UserService) {
     @PostMapping("/thumbnail")
     fun getAppThumbnail() : List<String> {
         return listOf(
+            "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png",
+            "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png",
             "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png"
         )
     }
