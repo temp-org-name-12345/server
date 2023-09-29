@@ -2,7 +2,6 @@ package com.example.server.controller
 
 
 import com.example.server.dto.UserDto
-import com.example.server.entity.User
 import com.example.server.service.UserService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,7 +20,13 @@ class UserController(private val userService: UserService) {
 
     @PostMapping("/save")
     fun saveUser(@RequestBody userLogin: UserDto.UserLogin) : UserDto.UserLogin {
-        userService.saveUser(userLogin)
-        return userLogin
+        return userService.saveUser(userLogin)
+    }
+
+    @PostMapping("/thumbnail")
+    fun getAppThumbnail() : List<String> {
+        return listOf(
+            "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png"
+        )
     }
 }

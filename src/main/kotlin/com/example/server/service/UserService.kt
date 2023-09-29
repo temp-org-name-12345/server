@@ -16,8 +16,8 @@ class UserService(private val userRepository: UserRepository) {
         return UserDto.UserLogin.of(user)
     }
 
-    fun saveUser(userLogin: UserDto.UserLogin) : Unit {
-        val user = userLogin.toEntity()
-        userRepository.save(user)
+    fun saveUser(userLogin: UserDto.UserLogin) : UserDto.UserLogin {
+        val user = userRepository.save(userLogin.toEntity())
+        return UserDto.UserLogin.of(user)
     }
 }
