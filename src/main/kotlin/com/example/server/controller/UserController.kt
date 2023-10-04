@@ -40,14 +40,16 @@ class UserController(private val userService: UserService) {
         @RequestParam("userId") userId: Int,
         @RequestParam("lat") lat: Double,
         @RequestParam("lng") lng: Double,
-        @RequestParam("visitDate") visitDate: LocalDate,
+        @RequestParam("year") year: Int,
+        @RequestParam("month") month: Int,
+        @RequestParam("day") day: Int,
         @RequestParam("isSpecial") isSpecial: Boolean,
         @RequestParam("addressName") addressName: String,
         @RequestParam("storeName") storeName: String,
         @RequestParam("fullAddressName") fullAddressName: String
     ) : String {
         var ret = "meta : \n"
-        images.forEach { ret += it.originalFilename }
+        images.filterNotNull().forEach { ret += it.originalFilename }
         ret += "\n"
 
         ret += "data : " +
@@ -55,7 +57,9 @@ class UserController(private val userService: UserService) {
                 "userId: $userId,\n" +
                 "lat: $lat,\n" +
                 "lng: $lng,\n" +
-                "visitDate: $visitDate,\n" +
+                "year: $year,\n" +
+                "month: $month,\n" +
+                "day: $day,\n" +
                 "isSpecial: $isSpecial,\n" +
                 "addressName : $addressName,\n" +
                 "storeName : $storeName,\n" +
