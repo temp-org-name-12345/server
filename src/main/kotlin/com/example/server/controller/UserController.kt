@@ -36,7 +36,7 @@ class UserController(private val userService: UserService) {
 
     @PostMapping("/upload")
     fun uploadLocationInfo(
-        @RequestParam(value = "images", required = false) images: Array<MultipartFile>,
+        @RequestParam(value = "images", required = false) images: Array<MultipartFile> = arrayOf(),
         @RequestParam("userId") userId: Int,
         @RequestParam("lat") lat: Double,
         @RequestParam("lng") lng: Double,
