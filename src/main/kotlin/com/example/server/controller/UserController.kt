@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
+import java.time.LocalDate
 
 @RequestMapping("/api/v1/user")
 @RestController
@@ -36,10 +37,31 @@ class UserController(private val userService: UserService) {
     @PostMapping("/upload")
     fun uploadLocationInfo(
         @RequestParam("images") images: List<MultipartFile>,
-        @RequestParam("meta") metaData: Map<String, String>
+        @RequestParam("userId") userId: Int,
+        @RequestParam("lat") lat: Double,
+        @RequestParam("lng") lng: Double,
+        @RequestParam("visitDate") visitDate: LocalDate,
+        @RequestParam("isSpecial") isSpecial: Boolean,
+        @RequestParam("addressName") addressName: String,
+        @RequestParam("storeName") storeName: String,
+        @RequestParam("fullAddressName") fullAddressName: String
     ) : String {
-        var ret = metaData.toString() + "\n"
+        var ret = ""
         images.forEach { ret += it.name }
+        ret += "\n"
+
+        ret += "data : " +
+            "{" +
+                "userId: $userId," +
+                "lat: $lat," +
+                "lng: $lng," +
+                "visitDate: $visitDate," +
+                "isSpecial: $isSpecial," +
+                "addressName : $addressName," +
+                "storeName : $storeName," +
+                "fullAddressName: $fullAddressName" +
+            "}"
+
         return ret
     }
 }
