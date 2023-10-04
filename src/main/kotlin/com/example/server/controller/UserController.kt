@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 
 @RequestMapping("/api/v1/user")
 @RestController
@@ -30,5 +31,15 @@ class UserController(private val userService: UserService) {
             "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png",
             "https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user/admin/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7+2023-09-22+205154.png"
         )
+    }
+
+    @PostMapping("/upload")
+    fun uploadLocationInfo(
+        @RequestParam("images") images: List<MultipartFile>,
+        @RequestParam("meta") metaData: Map<String, String>
+    ) : String {
+        var ret = metaData.toString() + "\n"
+        images.forEach { ret += it.name }
+        return ret
     }
 }
