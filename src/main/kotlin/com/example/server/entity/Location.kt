@@ -1,7 +1,8 @@
 package com.example.server.entity
 
 import jakarta.persistence.*
-import java.time.LocalDateTime
+import java.time.LocalDate
+import kotlin.jvm.Transient
 
 @Entity
 class Location(
@@ -21,7 +22,16 @@ class Location(
     val count: Int,
 
     @Column(nullable = false, updatable = false)
-    val visitDate: LocalDateTime = LocalDateTime.now(),
+    val year: Int,
+
+    @Column(nullable = false, updatable = false)
+    val month: Int,
+
+    @Column(nullable = false, updatable = false)
+    val day: Int,
+
+    @Transient
+    val date: LocalDate = LocalDate.of(year, month, day),
 
     @Column(nullable = false, updatable = false)
     val isSpecial: Boolean,
