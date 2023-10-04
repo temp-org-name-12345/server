@@ -46,7 +46,7 @@ class UserController(private val userService: UserService) {
         @RequestParam("storeName") storeName: String,
         @RequestParam("fullAddressName") fullAddressName: String
     ) : String {
-        var ret = ""
+        var ret = "meta : \n"
         images.forEach { ret += it.originalFilename }
         ret += "\n"
 
