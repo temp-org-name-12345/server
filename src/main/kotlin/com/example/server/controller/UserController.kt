@@ -47,19 +47,19 @@ class UserController(private val userService: UserService) {
         @RequestParam("fullAddressName") fullAddressName: String
     ) : String {
         var ret = ""
-        images.forEach { ret += it.name }
+        images.forEach { ret += it.originalFilename }
         ret += "\n"
 
         ret += "data : " +
             "{" +
-                "userId: $userId," +
-                "lat: $lat," +
-                "lng: $lng," +
-                "visitDate: $visitDate," +
-                "isSpecial: $isSpecial," +
-                "addressName : $addressName," +
-                "storeName : $storeName," +
-                "fullAddressName: $fullAddressName" +
+                "userId: $userId,\n" +
+                "lat: $lat,\n" +
+                "lng: $lng,\n" +
+                "visitDate: $visitDate,\n" +
+                "isSpecial: $isSpecial,\n" +
+                "addressName : $addressName,\n" +
+                "storeName : $storeName,\n" +
+                "fullAddressName: $fullAddressName\n" +
             "}"
 
         return ret

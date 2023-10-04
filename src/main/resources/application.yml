@@ -32,5 +32,11 @@ spring:
   profiles:
     active: prod
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 100MB
+
 # EC2 SSH 접속 :  ssh -i "ddakdae-pem.pem" ubuntu@ec2-15-164-24-152.ap-northeast-2.compute.amazonaws.com
 # EC2 -> RDS 접속 : psql --host=ddakdae-rds-instance.ci75bvjgjcvv.ap-northeast-2.rds.amazonaws.com --port=5432 --username=postgres
