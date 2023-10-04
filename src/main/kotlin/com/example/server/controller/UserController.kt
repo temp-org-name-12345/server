@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.time.LocalDate
@@ -34,6 +35,7 @@ class UserController(private val userService: UserService) {
         )
     }
 
+    /*
     @PostMapping("/upload")
     fun uploadLocationInfo(
         @RequestParam(value = "images", required = false) images: Array<MultipartFile> = arrayOf(),
@@ -68,4 +70,16 @@ class UserController(private val userService: UserService) {
 
         return ret
     }
+
+     */
+
+    @PostMapping("/upload")
+    fun uploadLocationInfo(
+        @RequestPart map: Map<String, Any>
+    ) : String {
+        var ret = "meta : \n"
+        ret += map.toMap()
+        return ret
+    }
+
 }

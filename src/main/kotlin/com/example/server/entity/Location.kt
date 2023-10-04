@@ -30,9 +30,6 @@ class Location(
     @Column(nullable = false, updatable = false)
     val day: Int,
 
-    @Transient
-    val date: LocalDate = LocalDate.of(year, month, day),
-
     @Column(nullable = false, updatable = false)
     val isSpecial: Boolean,
 
@@ -55,4 +52,7 @@ class Location(
         orphanRemoval = true
     )
     val locationReviews: List<LocationReview> = listOf()
-)
+) {
+
+    val date: LocalDate get() = LocalDate.of(year, month, day)
+}
