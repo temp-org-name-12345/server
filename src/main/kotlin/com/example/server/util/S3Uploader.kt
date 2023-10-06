@@ -21,8 +21,13 @@ class S3Uploader(
     private val bucket: String
 ) {
     companion object {
+        private val os = System.getProperty("os.name")
+        private var imagePath = "/src/main/resources/images"
+
         private val dirPath =
-            System.getProperty("user.dir") + "/src/main/resources/images"
+            if (os.contains("Linux")) "/home/ubuntu/app/${imagePath}"
+            else if (os.contains("Windows")) System.getProperty("user.dir") + "\\${imagePath.replace("/", "\\")}"
+            else ""
     }
 
     fun uploadFileToS3(multipartFile: MultipartFile, userId: Int) : String {
