@@ -18,5 +18,18 @@ class LocationPhoto(
 
     @ManyToOne
     @JoinColumn(name = "location_id")
-    val location: Location
-)
+    var location: Location
+) {
+    companion object {
+        fun of(location: Location, path: String) : LocationPhoto {
+            return LocationPhoto(
+                path = path,
+                location = location
+            )
+        }
+    }
+
+    fun fetchLocation(location: Location) {
+        this.location = location
+    }
+}

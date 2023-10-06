@@ -2,7 +2,6 @@ package com.example.server.controller
 
 
 import com.example.server.dto.UserDto
-import com.example.server.service.ImageUploadRes
 import com.example.server.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,17 +13,7 @@ import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 
-data class AddLocationReq(
-    val lat: Double?,
-    val lng: Double?,
-    val year: Int,
-    val month: Int,
-    val day: Int,
-    val isSpecial: Boolean?,
-    val addressName: String?,
-    val storeName: String?,
-    val userId: Int?,
-)
+
 
 @RequestMapping("/api/v1/user")
 @RestController
@@ -48,24 +37,12 @@ class UserController(private val userService: UserService) {
         )
     }
 
-    @PostMapping("/upload")
-    fun uploadLocationInfo(
-        @RequestPart(value = "images", required = false) images: List<MultipartFile> = listOf(),
-        @RequestPart(value = "req") req: AddLocationReq
-    ) : ResponseEntity<ImageUploadRes> {
-        val result = userService.uploadLocationInfo(images, req)
+    @PostMapping("/upload/new")
+    fun uploadNewLocationInfo(
+        @RequestPart(value = "images", required = false) images: List<MultipartFile>,
+        @RequestPart(value = "req") req: UserDto.AddLocationReq
+    ) : ResponseEntity<UserDto.ImageUploadRes> {
+        val result = userService.uploadNewLocationInfo(images, req)
         return ResponseEntity.ok(result)
     }
-
-    /*
-    @PostMapping("/upload")
-    fun uploadLocationInfo(
-        @RequestPart map: Map<String, Any>
-    ) : String {
-        var ret = "meta : \n"
-        ret += map.toMap()
-        return ret
-    }
-     */
-
 }

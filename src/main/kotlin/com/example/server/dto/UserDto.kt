@@ -31,4 +31,21 @@ class UserDto {
             )
         }
     }
+
+    data class AddLocationReq(
+        val lat: Double,
+        val lng: Double,
+        val year: Int,
+        val month: Int,
+        val day: Int,
+        val isSpecial: Boolean,
+        val addressName: String,
+        val storeName: String,
+        val userId: Int,
+    )
+
+    data class ImageUploadRes(
+        val imageUrls: List<String>,
+        val data: AddLocationReq
+    )
 }
