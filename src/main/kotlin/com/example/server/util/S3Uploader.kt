@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 /* https://sennieworld.tistory.com/122 */
 @Component
@@ -20,7 +21,8 @@ class S3Uploader(
     private val bucket: String
 ) {
     companion object {
-        private val dirPath = System.getProperty("user.dir") + "/src/main/resources/images"
+        private val dirPath =
+            System.getProperty("user.dir") + "/src/main/resources/images"
     }
 
     fun uploadFileToS3(multipartFile: MultipartFile, userId: Int) : String {
