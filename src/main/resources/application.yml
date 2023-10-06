@@ -26,6 +26,21 @@ logging:
   level:
     org.springframework.r2dbc: DEBUG
 
+# AWS 설정
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIASNXCUWGU2URKBXHN
+      secretKey: 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
+    s3:
+      bucket: ddakdae-s3-bucket
+      bucket-path: https://ddakdae-s3-bucket.s3.ap-northeast-2.amazonaws.com/user
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
 ---
 
 spring:

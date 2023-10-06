@@ -36,6 +36,9 @@ dependencies {
 
 	runtimeOnly("org.postgresql:postgresql")
 
+	// AWS S3
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.security:spring-security-test")

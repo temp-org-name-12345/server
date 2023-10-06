@@ -2,6 +2,7 @@ package com.example.server.controller
 
 
 import com.example.server.dto.UserDto
+import com.example.server.service.ImageUploadRes
 import com.example.server.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -49,11 +50,11 @@ class UserController(private val userService: UserService) {
 
     @PostMapping("/upload")
     fun uploadLocationInfo(
-        @RequestPart(value = "images", required = false) images: Array<MultipartFile> = arrayOf(),
+        @RequestPart(value = "images", required = false) images: List<MultipartFile> = listOf(),
         @RequestPart(value = "req") req: AddLocationReq
-    ) : ResponseEntity<String> {
-        val ret = "Server OK"
-        return ResponseEntity.ok(ret)
+    ) : ResponseEntity<ImageUploadRes> {
+        val result = userService.uploadLocationInfo(images, req)
+        return ResponseEntity.ok(result)
     }
 
     /*
