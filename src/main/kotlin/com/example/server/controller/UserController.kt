@@ -11,7 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
-import java.time.LocalDate
+
+data class AddLocationReq(
+    val lat: Double?,
+    val lng: Double?,
+    val year: Int,
+    val month: Int,
+    val day: Int,
+    val isSpecial: Boolean?,
+    val addressName: String?,
+    val storeName: String?,
+    val userId: Int?,
+)
 
 @RequestMapping("/api/v1/user")
 @RestController
@@ -35,44 +46,20 @@ class UserController(private val userService: UserService) {
         )
     }
 
-    /*
     @PostMapping("/upload")
     fun uploadLocationInfo(
-        @RequestParam(value = "images", required = false) images: Array<MultipartFile> = arrayOf(),
-        @RequestParam("userId") userId: Int,
-        @RequestParam("lat") lat: Double,
-        @RequestParam("lng") lng: Double,
-        @RequestParam("year") year: Int,
-        @RequestParam("month") month: Int,
-        @RequestParam("day") day: Int,
-        @RequestParam("isSpecial") isSpecial: Boolean,
-        @RequestParam("addressName") addressName: String,
-        @RequestParam("storeName") storeName: String,
-        @RequestParam("fullAddressName") fullAddressName: String
+        @RequestPart(value = "images", required = false) images: Array<MultipartFile> = arrayOf(),
+        @RequestPart(value = "req") req: AddLocationReq
     ) : String {
         var ret = "meta : \n"
-        images.filterNotNull().forEach { ret += it.originalFilename }
+        images.forEach { ret += it.originalFilename }
         ret += "\n"
-
-        ret += "data : " +
-            "{" +
-                "userId: $userId,\n" +
-                "lat: $lat,\n" +
-                "lng: $lng,\n" +
-                "year: $year,\n" +
-                "month: $month,\n" +
-                "day: $day,\n" +
-                "isSpecial: $isSpecial,\n" +
-                "addressName : $addressName,\n" +
-                "storeName : $storeName,\n" +
-                "fullAddressName: $fullAddressName\n" +
-            "}"
+        ret += "data : ${req.toString()}"
 
         return ret
     }
 
-     */
-
+    /*
     @PostMapping("/upload")
     fun uploadLocationInfo(
         @RequestPart map: Map<String, Any>
@@ -81,5 +68,6 @@ class UserController(private val userService: UserService) {
         ret += map.toMap()
         return ret
     }
+     */
 
 }
