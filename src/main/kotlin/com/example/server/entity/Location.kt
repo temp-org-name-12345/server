@@ -6,7 +6,6 @@ import java.time.LocalDate
 
 @Entity
 @Table(indexes = [
-    Index(unique = true, columnList = "addressName"),
     Index(unique = true, columnList = "storeName")
 ])
 class Location(
